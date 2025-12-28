@@ -1,6 +1,7 @@
 package com.fm.footballer_service.service;
 
 
+import com.fm.footballer_service.dto.FootballerRequestDTO;
 import com.fm.footballer_service.dto.FootballerResponseDTO;
 import com.fm.footballer_service.mapper.FootballerMapper;
 import com.fm.footballer_service.model.Footballer;
@@ -23,4 +24,12 @@ public class FootballerService {
         return footballers.stream()
                 .map(FootballerMapper::toDTO).toList();
     }
+
+
+    public FootballerResponseDTO createFootballer(FootballerRequestDTO footballerRequestDTO){
+        Footballer newFootballer = footballerRepository.save(FootballerMapper.toModel(footballerRequestDTO));
+        return FootballerMapper.toDTO(newFootballer);
+    }
+
+
 }
