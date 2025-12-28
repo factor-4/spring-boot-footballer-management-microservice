@@ -1,5 +1,4 @@
-package com.fm.footballer_service.model;
-
+package com.fm.footballer_service.dto;
 
 import com.fm.footballer_service.Enum.PlayingRole;
 import jakarta.persistence.*;
@@ -8,37 +7,21 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
-@Entity
-public class Footballer {
+public class FootballerResponseDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
 
-    @NotNull
+    private String id;
     private String name;
-
-    @NotNull
-    @Email
-    @Column(unique = true)
     private String email;
-
-    @NotNull
     private String address;
-
-    @NotNull
     private String age;
+    private String playingRole;
 
-    @Enumerated(EnumType.STRING)
-    @NotNull
-    private PlayingRole playingRole;
-
-
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -74,15 +57,13 @@ public class Footballer {
         this.age = age;
     }
 
-    public PlayingRole getPlayingRole() {
+    public String getPlayingRole() {
         return playingRole;
     }
 
-    public void setPlayingRole(PlayingRole playingRole) {
+    public void setPlayingRole(String playingRole) {
         this.playingRole = playingRole;
     }
-
-
 
 
 }
