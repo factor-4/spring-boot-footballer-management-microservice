@@ -5,7 +5,9 @@ import com.fm.footballer_service.dto.FootballerRequestDTO;
 import com.fm.footballer_service.dto.FootballerResponseDTO;
 import com.fm.footballer_service.service.FootballerService;
 import jakarta.validation.Valid;
+import jakarta.validation.groups.Default;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,10 +44,16 @@ public class FootballerController {
     @PutMapping("/{id}")
     public ResponseEntity<FootballerResponseDTO> updateFootballer(
             @PathVariable UUID id,
-            @RequestBody FootballerRequestDTO footballerRequestDTO) {
+            @Validated({Default.class}) @RequestBody FootballerRequestDTO footballerRequestDTO) {
 
         FootballerResponseDTO footballer = footballerService.updateFootballer(id, footballerRequestDTO);
         return ResponseEntity.ok().body(footballer);
 
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFootballer(@PathVariable UUID id) {
+        footballerService.deleteFootballer(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -9,4 +9,6 @@ import java.util.UUID;
 @Repository
 public interface FootballerRepository extends JpaRepository<Footballer, UUID> {
     boolean existsByEmail(String email);
+    boolean existsByEmailAndIdNot(String email, UUID id);
+
 }

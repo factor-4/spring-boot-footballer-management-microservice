@@ -44,7 +44,8 @@ public class FootballerService {
                 ()-> new FootballerNotFoundException("Footballer not found with ID: "+ id));
 
 
-        if (footballerRepository.existsByEmail(footballerRequestDTO.getEmail())) {
+        if (footballerRepository.existsByEmailAndIdNot(footballerRequestDTO.getEmail(), id)) {
+
             throw new EmailAlreadyExistsException("A footballer with this" + "already exists " + footballerRequestDTO.getEmail());
         }
 
@@ -60,5 +61,9 @@ public class FootballerService {
         return FootballerMapper.toDTO(updatedFootballer);
     }
 
+
+    public void deleteFootballer(UUID id) {
+        footballerRepository.deleteById(id);
+    }
 
 }
