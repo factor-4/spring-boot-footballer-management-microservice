@@ -4,6 +4,8 @@ package com.fm.footballer_service.controller;
 import com.fm.footballer_service.dto.FootballerRequestDTO;
 import com.fm.footballer_service.dto.FootballerResponseDTO;
 import com.fm.footballer_service.service.FootballerService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.groups.Default;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/footballers")
+@Tag(name = "Footballer", description = "Api for managing Footballers")
 public class FootballerController {
 
 
@@ -25,6 +28,7 @@ public class FootballerController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all the Footballers")
     public ResponseEntity<List<FootballerResponseDTO>> getFootballers() {
 
         List<FootballerResponseDTO> footballers = footballerService.getFootballers();
@@ -33,6 +37,8 @@ public class FootballerController {
     }
 
     @PostMapping
+    @Operation(summary = "Create a new Footballer")
+
     public ResponseEntity<FootballerResponseDTO> createFootballer(
             @Valid @RequestBody FootballerRequestDTO footballerRequestDTO) {
 
@@ -42,6 +48,8 @@ public class FootballerController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update a Footballer")
+
     public ResponseEntity<FootballerResponseDTO> updateFootballer(
             @PathVariable UUID id,
             @Validated({Default.class}) @RequestBody FootballerRequestDTO footballerRequestDTO) {
@@ -52,6 +60,8 @@ public class FootballerController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a footballer")
+
     public ResponseEntity<Void> deleteFootballer(@PathVariable UUID id) {
         footballerService.deleteFootballer(id);
         return ResponseEntity.noContent().build();
