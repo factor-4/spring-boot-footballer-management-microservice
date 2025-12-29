@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/footballers")
@@ -34,6 +35,16 @@ public class FootballerController {
             @Valid @RequestBody FootballerRequestDTO footballerRequestDTO) {
 
         FootballerResponseDTO footballer = footballerService.createFootballer(footballerRequestDTO);
+        return ResponseEntity.ok().body(footballer);
+
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<FootballerResponseDTO> updateFootballer(
+            @PathVariable UUID id,
+            @RequestBody FootballerRequestDTO footballerRequestDTO) {
+
+        FootballerResponseDTO footballer = footballerService.updateFootballer(id, footballerRequestDTO);
         return ResponseEntity.ok().body(footballer);
 
     }

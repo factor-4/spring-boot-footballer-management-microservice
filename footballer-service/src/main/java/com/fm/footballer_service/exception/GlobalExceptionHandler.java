@@ -41,4 +41,17 @@ public class GlobalExceptionHandler {
     }
 
 
+    @ExceptionHandler(FootballerNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleFootballerNotFoundException(FootballerNotFoundException ex) {
+
+        log.warn("Footballer not found {} ", ex.getMessage());
+
+        Map<String, String> errors = new HashMap<>();
+
+        errors.put("message", "Footballer not found");
+        return ResponseEntity.badRequest().body(errors);
+
+    }
+
+
 }
